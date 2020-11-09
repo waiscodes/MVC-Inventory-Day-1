@@ -22,11 +22,8 @@ namespace MVC_Inventory.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int(10)");
 
-                    b.Property<string>("Discontinued")
-                        .IsRequired()
-                        .HasColumnType("char(1)")
-                        .HasAnnotation("MySql:CharSet", "utf8mb4")
-                        .HasAnnotation("MySql:Collation", "utf8mb4_general_ci");
+                    b.Property<int>("Discontinued")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -45,70 +42,70 @@ namespace MVC_Inventory.Migrations
                         new
                         {
                             ID = -1,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "iPhone",
                             Quantity = 12
                         },
                         new
                         {
                             ID = -2,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "iPad",
                             Quantity = 2
                         },
                         new
                         {
                             ID = -3,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "iMac",
                             Quantity = 12
                         },
                         new
                         {
                             ID = -4,
-                            Discontinued = "0",
+                            Discontinued = 0,
                             Name = "iPod",
                             Quantity = 12
                         },
                         new
                         {
                             ID = -5,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "Apple Watch",
                             Quantity = 4
                         },
                         new
                         {
                             ID = -6,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "Apple Home",
                             Quantity = 20
                         },
                         new
                         {
                             ID = -7,
-                            Discontinued = "0",
+                            Discontinued = 1,
                             Name = "Apple Glasses",
-                            Quantity = 10
+                            Quantity = 0
                         },
                         new
                         {
                             ID = -8,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "Airpods",
                             Quantity = 19
                         },
                         new
                         {
                             ID = -9,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "MacBook",
                             Quantity = 7
                         },
                         new
                         {
                             ID = -10,
-                            Discontinued = "1",
+                            Discontinued = 1,
                             Name = "Mac Mini",
                             Quantity = 7
                         });

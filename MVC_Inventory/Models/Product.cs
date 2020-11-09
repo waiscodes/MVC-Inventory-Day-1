@@ -22,7 +22,7 @@ namespace MVC_Inventory.Models
         [Column(TypeName = "int(10)")]
         public int Quantity { get; set; }
 
-        [Column(TypeName = "char(1)")]
+        [Column(TypeName = "boolean")]
         public int Discontinued { get; set; }
     }
 }

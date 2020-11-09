@@ -32,9 +32,6 @@ namespace MVC_Inventory.Models
                 entity.Property(e => e.Name)
                       .HasCharSet("utf8mb4")
                       .HasCollation("utf8mb4_general_ci");
-                entity.Property(e => e.Discontinued)
-                      .HasCharSet("utf8mb4")
-                      .HasCollation("utf8mb4_general_ci");
 
                 entity.HasData(
                    new Product()
@@ -44,7 +41,7 @@ namespace MVC_Inventory.Models
                        Quantity = 12,
                        Discontinued = 1
                    }
-                );
+                );;
                 entity.HasData(
                    new Product()
                    {
@@ -95,8 +92,8 @@ namespace MVC_Inventory.Models
                    {
                        ID = -7,
                        Name = "Apple Glasses",
-                       Quantity = 10,
-                       Discontinued = 0
+                       Quantity = 0,
+                       Discontinued = 1
                    }
                 );
                 entity.HasData(

@@ -19,30 +19,30 @@ namespace MVC_Inventory.Controllers
 
         }
 
-        public Product DiscontinueProductByID(string id)
-        {
+        //public Product DiscontinueProductByID(string id)
+        //{
 
-        }
+        //}
 
-        public Product ReceiveProductByID(string id)
-        {
+        //public Product ReceiveProductByID(string id)
+        //{
 
-        }
+        //}
 
-        public Product SendProductByID(string id)
-        {
+        //public Product SendProductByID(string id)
+        //{
 
-        }
+        //}
 
-        public List<Product> GetInventory()
-        {
+        //public List<Product> GetInventory()
+        //{
 
-        }
+        //}
 
-        public Product GetProductByID(string id)
-        {
+        //public Product GetProductByID(string id)
+        //{
 
-        }
+        //}
 
 
     }
