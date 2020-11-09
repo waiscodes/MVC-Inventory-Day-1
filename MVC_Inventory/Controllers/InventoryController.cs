@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using MVC_Inventory.Controllers;
 using MVC_Inventory.Models;
 
-namespace ProductInformation.Controllers
+namespace MVC_Inventory.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProductAPIController : ControllerBase
+    public class InventoryController : ControllerBase
     {
         [HttpPost("Create")]
         public ActionResult<Product> ProductCreate_POST(string name, string quantity)
@@ -21,9 +21,9 @@ namespace ProductInformation.Controllers
             {
                 result = new ProductController().CreateProduct(name, quantity);
             }
-            catch
+            catch (Exception e)
             {
-                result = StatusCode(500, "Unknown error occurred, please try again later.");
+                result = StatusCode(500, "Error: "+ e.Message);
             }
             return result;
         }
