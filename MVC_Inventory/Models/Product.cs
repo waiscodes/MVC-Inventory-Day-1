@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProductInformation.Models
+namespace MVC_Inventory.Models
 {
     [Table("Product")]
     public class Product

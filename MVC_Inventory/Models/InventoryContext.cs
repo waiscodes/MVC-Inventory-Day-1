@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using ProductInformation.Models;
+using MVC_Inventory.Models;
 
 namespace MVC_Inventory.Models
 {
@@ -23,7 +23,6 @@ namespace MVC_Inventory.Models
 
                 optionsBuilder.UseMySql(connection, x => x.ServerVersion(version));
             }
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -78,7 +77,7 @@ namespace MVC_Inventory.Models
                    {
                        ID = -5,
                        Name = "Apple Watch",
-                       Quantity = 12,
+                       Quantity = 4,
                        Discontinued = 1
                    }
                 );
@@ -87,7 +86,43 @@ namespace MVC_Inventory.Models
                    {
                        ID = -6,
                        Name = "Apple Home",
-                       Quantity = 12,
+                       Quantity = 20,
+                       Discontinued = 1
+                   }
+                );
+                entity.HasData(
+                   new Product()
+                   {
+                       ID = -7,
+                       Name = "Apple Glasses",
+                       Quantity = 10,
+                       Discontinued = 0
+                   }
+                );
+                entity.HasData(
+                   new Product()
+                   {
+                       ID = -8,
+                       Name = "Airpods",
+                       Quantity = 19,
+                       Discontinued = 1
+                   }
+                );
+                entity.HasData(
+                   new Product()
+                   {
+                       ID = -9,
+                       Name = "MacBook",
+                       Quantity = 7,
+                       Discontinued = 1
+                   }
+                );
+                entity.HasData(
+                   new Product()
+                   {
+                       ID = -10,
+                       Name = "Mac Mini",
+                       Quantity = 7,
                        Discontinued = 1
                    }
                 );

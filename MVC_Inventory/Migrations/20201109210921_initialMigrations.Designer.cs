@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Inventory.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20201109204507_seedData")]
-    partial class seedData
+    [Migration("20201109210921_initialMigrations")]
+    partial class initialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace MVC_Inventory.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ProductInformation.Models.Product", b =>
+            modelBuilder.Entity("MVC_Inventory.Models.Product", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -77,14 +77,42 @@ namespace MVC_Inventory.Migrations
                             ID = -5,
                             Discontinued = "1",
                             Name = "Apple Watch",
-                            Quantity = 12
+                            Quantity = 4
                         },
                         new
                         {
                             ID = -6,
                             Discontinued = "1",
                             Name = "Apple Home",
-                            Quantity = 12
+                            Quantity = 20
+                        },
+                        new
+                        {
+                            ID = -7,
+                            Discontinued = "0",
+                            Name = "Apple Glasses",
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            ID = -8,
+                            Discontinued = "1",
+                            Name = "Airpods",
+                            Quantity = 19
+                        },
+                        new
+                        {
+                            ID = -9,
+                            Discontinued = "1",
+                            Name = "MacBook",
+                            Quantity = 7
+                        },
+                        new
+                        {
+                            ID = -10,
+                            Discontinued = "1",
+                            Name = "Mac Mini",
+                            Quantity = 7
                         });
                 });
 #pragma warning restore 612, 618
