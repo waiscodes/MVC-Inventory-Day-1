@@ -18,7 +18,6 @@ namespace MVC_Inventory.Controllers
         {
             name = !string.IsNullOrWhiteSpace(name) ? name.Trim() : null;
             quantity = !string.IsNullOrWhiteSpace(quantity) ? quantity.Trim() : null;
-            int dfltQuant = 0;
             int parsedQuant;
 
             using (InventoryContext context = new InventoryContext())
@@ -39,8 +38,26 @@ namespace MVC_Inventory.Controllers
 
                 if(string.IsNullOrWhiteSpace(quantity))
                 {
-
+                    parsedQuant = 0;
                 }
+                else if (int.TryParse(quantity, out parsedQuant))
+                {
+                    if(parsedQuant < 0)
+                    {
+                        throw new Exception("Quantity cannot be below 0");
+                    }
+                }
+
+                Product newProduct = new Product()
+                {
+                    Name = name,
+                    Quantity = parsedQuant,
+                    Discontinued = 1
+                };
+                context.Products.Add(newProduct);
+                context.SaveChanges();
+
+                return newProduct;
             }
         }
 
