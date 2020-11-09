@@ -22,7 +22,7 @@ namespace ProductInformation.Models
         [Column(TypeName = "int(10)")]
         public int Quantity { get; set; }
 
-        [Column(TypeName = "chat(1)")]
+        [Column(TypeName = "char(1)")]
         public int Discontinued { get; set; }
     }
 }
