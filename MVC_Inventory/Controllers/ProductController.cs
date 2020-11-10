@@ -105,11 +105,11 @@ namespace MVC_Inventory.Controllers
 
                 if (string.IsNullOrWhiteSpace(id))
                 {
-                    throw new Exception("Quantity must not be empty");
+                    throw new Exception("ID must not be empty");
                 }
                 else if (!int.TryParse(id, out parsedId))
                 {
-                    throw new Exception("Quantity must be an ID");
+                    throw new Exception("ID must be an number");
                 }
                 else if (!context.Products.Any(x => x.ID == parsedId))
                 {
@@ -122,7 +122,7 @@ namespace MVC_Inventory.Controllers
                 }
                 else if (!int.TryParse(quantity, out parsedQuant))
                 {
-                    throw new Exception("Quantity must be an ID");
+                    throw new Exception("Quantity must be an number");
                 }
 
                 result = context.Products.Where(product => product.ID == parsedId).SingleOrDefault();
@@ -138,9 +138,37 @@ namespace MVC_Inventory.Controllers
             id = !string.IsNullOrWhiteSpace(id) ? id.Trim() : null;
             Product result;
             quantity = !string.IsNullOrWhiteSpace(quantity) ? quantity.Trim() : null;
+            int parsedId;
+            int parsedQuant;
 
             using (InventoryContext context = new InventoryContext())
             {
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new Exception("ID must not be empty");
+                }
+                else if (!int.TryParse(id, out parsedId))
+                {
+                    throw new Exception("ID must be an ID");
+                }
+                else if (!context.Products.Any(x => x.ID == parsedId))
+                {
+                    throw new Exception("This product does not exist");
+                }
+
+                if (string.IsNullOrWhiteSpace(quantity))
+                {
+                    throw new Exception("Quantity must not be empty");
+                }
+                else if (!int.TryParse(quantity, out parsedQuant))
+                {
+                    throw new Exception("Quantity must be an number");
+                }
+                else if(context.Products.Where(x => x.ID == parsedId).Select(x => x.Quantity - parsedQuant).SingleOrDefault() < 0)
+                {
+                    throw new Exception("Not enough inventory");
+                }
+
                 result = context.Products.Where(product => product.ID == int.Parse(id)).SingleOrDefault();
 
                 result.Quantity -= int.Parse(quantity);
