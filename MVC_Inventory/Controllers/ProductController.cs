@@ -212,18 +212,24 @@ namespace MVC_Inventory.Controllers
             Product result;
             int parsedID;
 
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                throw new ArgumentNullException(nameof(id), nameof(id) + " is null.");
-            }
-            if (!int.TryParse(id, out parsedID))
-            {
-                throw new ArgumentException(nameof(id) + " is not valid.", nameof(id));
-            }
-
             using (InventoryContext context = new InventoryContext())
             {
-                result = context.Products.Where(x => x.ID == parsedID).Single();
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new ArgumentNullException(nameof(id), nameof(id) + " is null.");
+                }
+                else if (!int.TryParse(id, out parsedID))
+                {
+                    throw new ArgumentException(nameof(id) + " is not valid.", nameof(id));
+                }
+                else if (!context.Products.Any(x => x.ID == parsedID))
+                {
+                    result = null;
+                }
+                else
+                {
+                    result = context.Products.Where(x => x.ID == parsedID).Single();
+                }
             }
             return result;
         }
