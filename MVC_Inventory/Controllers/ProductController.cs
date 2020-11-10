@@ -61,10 +61,21 @@ namespace MVC_Inventory.Controllers
             }
         }
 
-        //public Product DiscontinueProductByID(string id)
-        //{
+        public Product DiscontinueProductByID(string id)
+        {
+            id = !string.IsNullOrWhiteSpace(id) ? id.Trim() : null;
+            Product result;
 
-        //}
+            using (InventoryContext context = new InventoryContext())
+            {
+                result = context.Products.Where(product => product.ID == int.Parse(id)).SingleOrDefault();
+
+                result.Discontinued = 0;
+                context.SaveChanges();
+            }
+            return result;
+
+        }
 
         //public Product ReceiveProductByID(string id)
         //{

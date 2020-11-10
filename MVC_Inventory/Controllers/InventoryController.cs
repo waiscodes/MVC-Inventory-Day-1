@@ -27,5 +27,21 @@ namespace MVC_Inventory.Controllers
             }
             return result;
         }
+
+
+        [HttpPut("Update")]
+        public ActionResult<Product> ProductUpdate_PUT(string id)
+        {
+            ActionResult<Product> result;
+            try
+            {
+                result = new ProductController().DiscontinueProductByID(id);
+            }
+            catch (Exception e)
+            {
+                result = NotFound(e.Message);
+            }
+            return result;
+        }
     }
 }
