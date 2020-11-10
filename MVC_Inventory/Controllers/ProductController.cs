@@ -93,20 +93,52 @@ namespace MVC_Inventory.Controllers
             return result;
         }
 
-        //public Product SendProductByID(string id)
-        //{
+        public Product SendProductByID(string id, string quantity)
+        {
+            id = !string.IsNullOrWhiteSpace(id) ? id.Trim() : null;
+            Product result;
+            quantity = !string.IsNullOrWhiteSpace(quantity) ? quantity.Trim() : null;
 
-        //}
+            using (InventoryContext context = new InventoryContext())
+            {
+                result = context.Products.Where(product => product.ID == int.Parse(id)).SingleOrDefault();
 
-        //public List<Product> GetInventory()
-        //{
+                result.Quantity -= int.Parse(quantity);
+                context.SaveChanges();
+            }
+            return result;
+        }
 
-        //}
+        public List<Product> GetInventory()
+        {
+            List<Product> results;
+            using (InventoryContext context = new InventoryContext())
+            {
+                results = context.Products.ToList();
+            }
+            return results;
+        }
 
-        //public Product GetProductByID(string id)
-        //{
+        public Product GetProductByID(string id)
+        {
+            Product result;
+            int parsedID;
 
-        //}
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException(nameof(id), nameof(id) + " is null.");
+            }
+            if (!int.TryParse(id, out parsedID))
+            {
+                throw new ArgumentException(nameof(id) + " is not valid.", nameof(id));
+            }
+
+            using (InventoryContext context = new InventoryContext())
+            {
+                result = context.Products.Where(x => x.ID == parsedID).Single();
+            }
+            return result;
+        }
 
 
     }

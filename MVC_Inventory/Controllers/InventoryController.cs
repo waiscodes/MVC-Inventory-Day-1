@@ -58,5 +58,49 @@ namespace MVC_Inventory.Controllers
             }
             return result;
         }
+
+        [HttpPut("Send")]
+        public ActionResult<Product> Send_PUT(string id, string quantity)
+        {
+            ActionResult<Product> result;
+            try
+            {
+                result = new ProductController().SendProductByID(id, quantity);
+            }
+            catch (Exception e)
+            {
+                result = NotFound(e.Message);
+            }
+            return result;
+        }
+
+        [HttpGet("All")]
+        public ActionResult<IEnumerable<Product>> GetAllProducts_GET()
+        {
+            return new ProductController().GetInventory();
+        }
+
+        [HttpGet("ByID")]
+        public ActionResult<Product> ProductByID_GET(string id)
+        {
+            ActionResult<Product> result;
+            try
+            {
+                result = new ProductController().GetProductByID(id);
+            }
+            catch (ArgumentNullException e)
+            {
+                result = BadRequest(e.Message);
+            }
+            catch (ArgumentException e)
+            {
+                result = BadRequest(e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                result = NotFound(e.Message);
+            }
+            return result;
+        }
     }
 }
