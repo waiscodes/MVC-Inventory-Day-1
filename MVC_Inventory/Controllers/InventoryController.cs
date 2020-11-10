@@ -77,7 +77,14 @@ namespace MVC_Inventory.Controllers
         [HttpGet("All")]
         public ActionResult<IEnumerable<Product>> GetAllProducts_GET(string listType)
         {
-            return new ProductController().GetInventory(listType);
+            try
+            {
+                return new ProductController().GetInventory(listType);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpGet("ByID")]
