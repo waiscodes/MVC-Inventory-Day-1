@@ -77,10 +77,21 @@ namespace MVC_Inventory.Controllers
 
         }
 
-        //public Product ReceiveProductByID(string id)
-        //{
+        public Product ReceiveProductByID(string id, string quantity)
+        {
+            id = !string.IsNullOrWhiteSpace(id) ? id.Trim() : null;
+            Product result;
+            quantity = !string.IsNullOrWhiteSpace(quantity) ? quantity.Trim() : null;
 
-        //}
+            using (InventoryContext context = new InventoryContext())
+            {
+                result = context.Products.Where(product => product.ID == int.Parse(id)).SingleOrDefault();
+
+                result.Quantity += int.Parse(quantity);
+                context.SaveChanges();
+            }
+            return result;
+        }
 
         //public Product SendProductByID(string id)
         //{
