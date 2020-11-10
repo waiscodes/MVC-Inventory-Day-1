@@ -114,7 +114,7 @@ namespace MVC_Inventory.Controllers
             List<Product> results;
             using (InventoryContext context = new InventoryContext())
             {
-                results = context.Products.ToList();
+                results = context.Products.Where(x => x.Discontinued == 1).ToList();
             }
             return results;
         }
