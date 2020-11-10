@@ -29,7 +29,7 @@ namespace MVC_Inventory.Controllers
         }
 
 
-        [HttpPut("Discontinue")]
+        [HttpPatch("Discontinue")]
         public ActionResult<Product> Discontinue_PUT(string id)
         {
             ActionResult<Product> result;

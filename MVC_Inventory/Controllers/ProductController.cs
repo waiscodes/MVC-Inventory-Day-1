@@ -65,10 +65,26 @@ namespace MVC_Inventory.Controllers
         {
             id = !string.IsNullOrWhiteSpace(id) ? id.Trim() : null;
             Product result;
+            int parsedID;
+
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new Exception("ID cannot be empty");
+            }
+            else if (!int.TryParse(id, out parsedID))
+            {
+                throw new Exception("ID must be an int");
+            }
+
 
             using (InventoryContext context = new InventoryContext())
             {
-                result = context.Products.Where(product => product.ID == int.Parse(id)).SingleOrDefault();
+                result = context.Products.Where(product => product.ID == parsedID).SingleOrDefault();
+
+                if (result.Discontinued == 0)
+                {
+                    throw new Exception("Product has alreayd been discontinued");
+                }
 
                 result.Discontinued = 0;
                 context.SaveChanges();
