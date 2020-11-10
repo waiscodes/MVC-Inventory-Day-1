@@ -194,18 +194,18 @@ namespace MVC_Inventory.Controllers
                 }
                 else if (string.IsNullOrWhiteSpace(listType) || listType == "active")
                 {
-                    results = context.Products.Where(x => x.Discontinued == 1).ToList();
+                    results = context.Products.Where(x => x.Discontinued == 1).OrderBy(x => x.Quantity).ToList();
                 }
                 else if (listType == "all")
                 {
-                    results = context.Products.ToList();
+                    results = context.Products.OrderBy(x => x.Name).ToList();
                 }
                 else
                 {
-                    results = context.Products.Where(x => x.Discontinued == 1).ToList();
+                    results = context.Products.Where(x => x.Discontinued == 1).OrderBy(x => x.Quantity).ToList();
                 }
 
-                return results.OrderBy(x => x.Quantity).ToList();
+                return results;
             }
         }
 
