@@ -177,14 +177,34 @@ namespace MVC_Inventory.Controllers
             return result;
         }
 
-        public List<Product> GetInventory()
+        public List<Product> GetInventory(string listType)
         {
+            listType = !string.IsNullOrWhiteSpace(listType) ? listType.Trim().ToLower() : null;
+
             List<Product> results;
             using (InventoryContext context = new InventoryContext())
             {
-                results = context.Products.Where(x => x.Discontinued == 1).ToList();
+                if (!string.IsNullOrWhiteSpace(listType) && listType != "all" && listType != "active")
+                {
+                    throw new Exception("Invalid input. Please pick 'active' or 'all' view");
+                }
+                else if (string.IsNullOrWhiteSpace(listType) || listType == "active")
+                {
+                    results = context.Products.Where(x => x.Discontinued == 1).ToList();
+                    return results;
+                }
+                else if (listType == "all")
+                {
+                    results = context.Products.ToList();
+                    return results;
+                }
+                else
+                {
+                    results = context.Products.Where(x => x.Discontinued == 1).ToList();
+                }
+
+                return results;
             }
-            return results;
         }
 
         public Product GetProductByID(string id)
