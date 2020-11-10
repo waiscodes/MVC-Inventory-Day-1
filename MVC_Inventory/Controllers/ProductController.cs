@@ -67,23 +67,22 @@ namespace MVC_Inventory.Controllers
             Product result;
             int parsedID;
 
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                throw new Exception("ID cannot be empty");
-            }
-            else if (!int.TryParse(id, out parsedID))
-            {
-                throw new Exception("ID must be an int");
-            }
-
-
             using (InventoryContext context = new InventoryContext())
             {
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new Exception("ID cannot be empty");
+                }
+                else if (!int.TryParse(id, out parsedID))
+                {
+                    throw new Exception("ID must be an int");
+                }
+
                 result = context.Products.Where(product => product.ID == parsedID).SingleOrDefault();
 
                 if (result.Discontinued == 0)
                 {
-                    throw new Exception("Product has alreayd been discontinued");
+                    throw new Exception("Product has already been discontinued");
                 }
 
                 result.Discontinued = 0;
@@ -98,12 +97,37 @@ namespace MVC_Inventory.Controllers
             id = !string.IsNullOrWhiteSpace(id) ? id.Trim() : null;
             Product result;
             quantity = !string.IsNullOrWhiteSpace(quantity) ? quantity.Trim() : null;
+            int parsedId;
+            int parsedQuant;
 
             using (InventoryContext context = new InventoryContext())
             {
-                result = context.Products.Where(product => product.ID == int.Parse(id)).SingleOrDefault();
 
-                result.Quantity += int.Parse(quantity);
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new Exception("Quantity must not be empty");
+                }
+                else if (!int.TryParse(id, out parsedId))
+                {
+                    throw new Exception("Quantity must be an ID");
+                }
+                else if (!context.Products.Any(x => x.ID == parsedId))
+                {
+                    throw new Exception("This product does not exist");
+                }
+
+                if (string.IsNullOrWhiteSpace(quantity))
+                {
+                    throw new Exception("Quantity must not be empty");
+                }
+                else if (!int.TryParse(quantity, out parsedQuant))
+                {
+                    throw new Exception("Quantity must be an ID");
+                }
+
+                result = context.Products.Where(product => product.ID == parsedId).SingleOrDefault();
+
+                result.Quantity += parsedQuant;
                 context.SaveChanges();
             }
             return result;

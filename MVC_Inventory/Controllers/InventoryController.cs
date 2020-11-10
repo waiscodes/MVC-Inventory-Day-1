@@ -44,7 +44,7 @@ namespace MVC_Inventory.Controllers
             return result;
         }
 
-        [HttpPut("Receive")]
+        [HttpPatch("Receive")]
         public ActionResult<Product> Receive_PUT(string id, string quantity)
         {
             ActionResult<Product> result;
@@ -59,7 +59,7 @@ namespace MVC_Inventory.Controllers
             return result;
         }
 
-        [HttpPut("Send")]
+        [HttpPatch("Send")]
         public ActionResult<Product> Send_PUT(string id, string quantity)
         {
             ActionResult<Product> result;
