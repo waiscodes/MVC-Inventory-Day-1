@@ -77,6 +77,10 @@ namespace MVC_Inventory.Controllers
                 {
                     throw new Exception("ID must be an int");
                 }
+                else if (!context.Products.Any(x => x.ID == parsedID))
+                {
+                    throw new Exception("Product was not found");
+                }
 
                 result = context.Products.Where(product => product.ID == parsedID).SingleOrDefault();
 
